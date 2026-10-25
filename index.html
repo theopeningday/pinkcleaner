@@ -996,142 +996,124 @@
             }
         }
 
-        /* reviews ticker */
-        .ticker {
+        /* reviews marquee */
+        .mq-head {
             display: flex;
-            align-items: stretch;
-            margin-top: 3rem;
-            background: var(--ink);
-            color: var(--bg);
-            border-block: 3px solid var(--brand)
+            align-items: end;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap
         }
 
-        .tk-tag {
-            flex: none;
-            display: grid;
-            place-items: center;
-            padding: 0 1.4rem;
+        .mq-badge {
+            margin-top: 1rem;
+            color: var(--mut)
+        }
+
+        .mq-ctl {
+            display: none;
+            gap: .5rem
+        }
+
+        .mq-ctl.on {
+            display: flex
+        }
+
+        .mq-ctl button {
+            min-width: 48px;
+            min-height: 48px;
+            padding: 0 1rem;
+            background: var(--card);
+            color: var(--ink);
+            border: 1px solid var(--brand);
+            border-radius: var(--r);
+            font: 600 1rem var(--b);
+            cursor: pointer
+        }
+
+        .mq-ctl button:hover {
             background: var(--brand);
-            color: var(--brand-ink);
-            font: 700 .8rem/1.15 var(--b);
-            letter-spacing: .14em;
-            text-transform: uppercase;
-            text-align: center;
-            position: relative;
-            z-index: 1
+            color: var(--brand-ink)
         }
 
-        .tk-view {
-            flex: 1;
-            min-width: 0;
+        .mq {
+            margin-top: 2.5rem;
+            overflow-x: auto;
+            padding-bottom: 1rem
+        }
+
+        .mq.on {
             overflow: hidden;
-            -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
-            mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent)
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent)
         }
 
-        .tk-track {
+        .mq-track {
             display: flex;
             width: max-content;
-            animation: tk 70s linear infinite
+            will-change: transform
         }
 
-        .ticker:hover .tk-track,
-        .ticker:focus-within .tk-track,
-        .ticker.paused .tk-track {
-            animation-play-state: paused
-        }
-
-        @keyframes tk {
-            to {
-                transform: translateX(-50%)
-            }
-        }
-
-        .tk-set {
+        .mq-set {
             display: flex;
             list-style: none;
             margin: 0;
             padding: 0
         }
 
-        .tk-item {
+        .mq-card {
+            flex: none;
+            width: clamp(260px, 80vw, 340px);
+            margin-right: clamp(.9rem, 2vw, 1.25rem);
+            display: flex
+        }
+
+        .mq-card figure {
+            margin: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--r)
+        }
+
+        .mq-card figcaption {
             display: flex;
             align-items: center;
-            gap: .9rem;
-            padding: 1.5rem 1.6rem 1.5rem 0;
-            white-space: nowrap
+            gap: .8rem;
+            margin-bottom: 1rem
         }
 
-        .tk-item:after {
-            content: "\2726";
-            color: var(--gold);
-            margin-left: 1rem
-        }
-
-        .tk-q {
-            font: 700 clamp(1.1rem, 2.2vw, 1.5rem) var(--h)
-        }
-
-        .tk-n {
-            font: 600 .8rem var(--b);
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            color: var(--accent-on-ink)
-        }
-
-        .tk-pause {
+        .mq-av {
             flex: none;
-            align-self: center;
-            margin: 0 1rem;
-            min-width: 64px;
-            min-height: 44px;
-            background: transparent;
-            color: inherit;
-            border: 1px solid currentColor;
-            border-radius: var(--r);
-            font: 600 .85rem var(--b);
-            cursor: pointer
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--brand);
+            color: var(--brand-ink);
+            font: 700 .95rem var(--h)
         }
 
-        .ticker :focus-visible {
-            outline-color: var(--accent-on-ink)
+        .mq-card b {
+            display: block;
+            font-family: var(--h)
         }
 
-        @media(prefers-reduced-motion:reduce) {
-            .tk-view {
-                overflow: visible;
-                -webkit-mask-image: none;
-                mask-image: none
-            }
-
-            .tk-track {
-                width: auto
-            }
-
-            .tk-set {
-                flex-wrap: wrap
-            }
-
-            .tk-set[aria-hidden],
-            .tk-pause {
-                display: none
-            }
-
-            .tk-item {
-                white-space: normal
-            }
+        .mq-card small {
+            color: var(--mut);
+            font-size: .85rem
         }
 
-        @media(max-width:600px) {
-            .tk-tag {
-                padding: 0 .8rem;
-                font-size: .7rem
-            }
+        .mq-card blockquote {
+            margin: 0;
+            font-size: 1.05rem;
+            line-height: 1.5
+        }
 
-            .tk-pause {
-                margin: 0 .5rem;
-                min-width: 56px
-            }
+        .mq:focus-visible {
+            outline-offset: -3px
         }
     </style>
 </head>
@@ -1260,29 +1242,39 @@
         </section>
 
         <section id="reviews" style="background:var(--petal)">
-            <div class="wrap"><span class="eyebrow">Reviews</span>
-                <h2 class="rv">In their words.</h2>
-            </div>
-            <!-- Excerpts from Facebook posts and a client message. Confirm permission before publishing. -->
-            <div class="ticker" role="region" aria-label="Client reviews">
-                <span class="tk-tag">Rave<br>reviews</span>
-                <div class="tk-view">
-                    <div class="tk-track">
-                        <ul class="tk-set">
-                            <li class="tk-item"><span class="tk-q">“They are an absolute cleaning wizard! My place has never looked so sparkling clean!”</span><span class="tk-n">Em R.</span></li>
-                            <li class="tk-item"><span class="tk-q">“Taylah cleaned our house yesterday and cannot recommend her enough.. she’s a miracle worker”</span><span class="tk-n">Laura W.</span></li>
-                            <li class="tk-item"><span class="tk-q">“Sparkling clean, thanks so much Taylah you did an amazing job”</span><span class="tk-n">Holly S.</span></li>
-                            <li class="tk-item"><span class="tk-q">“You’ve done such an amazing job and were a pleasure to have you here.”</span><span class="tk-n">Stephanie A.</span></li>
-                        </ul>
-                        <ul class="tk-set" aria-hidden="true">
-                            <li class="tk-item"><span class="tk-q">“They are an absolute cleaning wizard! My place has never looked so sparkling clean!”</span><span class="tk-n">Em R.</span></li>
-                            <li class="tk-item"><span class="tk-q">“Taylah cleaned our house yesterday and cannot recommend her enough.. she’s a miracle worker”</span><span class="tk-n">Laura W.</span></li>
-                            <li class="tk-item"><span class="tk-q">“Sparkling clean, thanks so much Taylah you did an amazing job”</span><span class="tk-n">Holly S.</span></li>
-                            <li class="tk-item"><span class="tk-q">“You’ve done such an amazing job and were a pleasure to have you here.”</span><span class="tk-n">Stephanie A.</span></li>
-                        </ul>
-                    </div>
+            <div class="wrap mq-head">
+                <div>
+                    <h2 class="rv">What my clients say.</h2>
+                    <p class="mq-badge">Few client reviews from Facebook and direct messages</p>
                 </div>
-                <button class="tk-pause" id="tkp" type="button">Pause</button>
+                <div class="mq-ctl" role="group" aria-label="Review controls">
+                    <button type="button" id="mqPrev" aria-label="Previous review">&#8592;</button>
+                    <button type="button" id="mqPlay" aria-label="Pause scrolling reviews">Pause</button>
+                    <button type="button" id="mqNext" aria-label="Next review">&#8594;</button>
+                </div>
+            </div>
+            <!-- Quotes are excerpts of Facebook posts and a client message. Confirm permission before publishing. -->
+            <div class="mq" id="mq" role="region" aria-label="Client reviews" tabindex="0">
+                <div class="mq-track">
+                    <ul class="mq-set">
+                        <li class="mq-card"><figure>
+                            <figcaption><span class="mq-av" aria-hidden="true">ER</span><span><b>Em R.</b><small>Facebook recommendation</small></span></figcaption>
+                            <blockquote>They are an absolute cleaning wizard! My place has never looked so sparkling clean!</blockquote>
+                        </figure></li>
+                        <li class="mq-card"><figure>
+                            <figcaption><span class="mq-av" aria-hidden="true">LW</span><span><b>Laura W.</b><small>Facebook recommendation</small></span></figcaption>
+                            <blockquote>Taylah cleaned our house yesterday and cannot recommend her enough.. she’s a miracle worker</blockquote>
+                        </figure></li>
+                        <li class="mq-card"><figure>
+                            <figcaption><span class="mq-av" aria-hidden="true">HS</span><span><b>Holly S.</b><small>Facebook comment</small></span></figcaption>
+                            <blockquote>Sparkling clean, thanks so much Taylah you did an amazing job</blockquote>
+                        </figure></li>
+                        <li class="mq-card"><figure>
+                            <figcaption><span class="mq-av" aria-hidden="true">SA</span><span><b>Stephanie A.</b><small>Client message</small></span></figcaption>
+                            <blockquote>You’ve done such an amazing job and were a pleasure to have you here.</blockquote>
+                        </figure></li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -1424,9 +1416,39 @@
             }
             catch { st.textContent = "Something went wrong and your request wasn't sent. Your details are still here. Please try again or message @the.pink.cleaner on Instagram."; b.disabled = false; b.textContent = "Join the Waitlist" }
         };
-        // reviews ticker
-        const tk = $(".ticker"), tp = $("#tkp");
-        tp.onclick = () => { const p = tk.classList.toggle("paused"); tp.textContent = p ? "Play" : "Pause" };
+        // reviews marquee
+        (() => {
+            const mq = $("#mq"), track = mq.querySelector(".mq-track"), set = track.firstElementChild, ctl = $(".mq-ctl"), play = $("#mqPlay");
+            const MODE = "slide";      // "slide" = one card at a time, "flow" = continuous scroll
+            const INTERVAL = 3500;     // ms between slides (slide mode)
+            const RESPECT_REDUCED_MOTION = true; // set false to animate even when the OS has animations turned off
+            const reduce = RESPECT_REDUCED_MOTION && matchMedia("(prefers-reduced-motion: reduce)").matches;
+            ctl.classList.add("on");
+            const step = () => (set.firstElementChild.offsetWidth || 340) + 20;
+            if (reduce) { play.hidden = true; $("#mqPrev").onclick = () => mq.scrollBy({ left: -step(), behavior: "smooth" }); $("#mqNext").onclick = () => mq.scrollBy({ left: step(), behavior: "smooth" }); return }
+            const orig = [...set.children];
+            while (set.scrollWidth < mq.clientWidth * 1.2) orig.forEach(c => { const k = c.cloneNode(true); k.setAttribute("aria-hidden", "true"); set.appendChild(k) });
+            const dup = set.cloneNode(true); dup.setAttribute("aria-hidden", "true"); track.appendChild(dup);
+            mq.classList.add("on"); mq.removeAttribute("tabindex");
+            let x = 0, v = 0, jump = 0, paused = false, hover = false, last = performance.now(), lastAuto = last;
+            const SPEED = 45; // px per second (flow mode)
+            const tick = t => {
+                const dt = Math.min((t - last) / 1000, .05); last = t;
+                const W = set.getBoundingClientRect().width;
+                v += ((MODE === "flow" && !paused && !hover ? SPEED : 0) - v) * Math.min(1, dt * 6); // eases to a stop and back
+                if (paused || hover) lastAuto = t;
+                else if (MODE === "slide" && t - lastAuto >= INTERVAL) { jump += step(); lastAuto = t }
+                const j = jump * Math.min(1, dt * 8); jump -= j;
+                x -= v * dt + j;
+                x = ((x % W) - W) % W;
+                track.style.transform = `translate3d(${x}px,0,0)`;
+                requestAnimationFrame(tick)
+            };
+            requestAnimationFrame(tick);
+            mq.onmouseenter = () => hover = true; mq.onmouseleave = () => hover = false;
+            play.onclick = () => { paused = !paused; play.textContent = paused ? "Play" : "Pause"; play.setAttribute("aria-label", paused ? "Play scrolling reviews" : "Pause scrolling reviews") };
+            $("#mqNext").onclick = () => { jump += step(); lastAuto = performance.now() }; $("#mqPrev").onclick = () => { jump -= step(); lastAuto = performance.now() };
+        })();
     </script>
 </body>
 
